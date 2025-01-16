@@ -1,4 +1,4 @@
-name: Update Index
+name: Update Heml Index
 
 on:
   push:
@@ -18,11 +18,12 @@ jobs:
         with:
           version: "latest"
 
-      - name: Update Index
+      - name: Update Helm Chart Index
         run: |
-            helm repo index .
-            git config --global user.email "${GITHUB_ACTOR}@gmail.com"
-            git config --global user.name "${GITHUB_ACTOR}"
-            git add index.yaml
-            git commit -m "Update chart index"
-            git push
+          git config --global user.email "${GITHUB_ACTOR}@gmail.com"
+          git config --global user.name "${GITHUB_ACTOR}"
+          git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/dvanthanh1992/helm-chart-repository.git
+          helm repo index .
+          git add index.yaml
+          git commit -m "Update chart index"
+          git push
