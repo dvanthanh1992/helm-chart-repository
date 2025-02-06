@@ -9,11 +9,11 @@ replicaCount: 1
 image:
   repository: dvanthanh1992/demo-app-py
   pullPolicy: IfNotPresent
-  tag: "7.0.0"
+  tag: "6.0.0"
 
 # This sets the environment variables for the container more information can be found here: https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/
 env:
-  STAGE_ENVIRONMENT: "STG"
+  STAGE_ENVIRONMENT: "LOCAL"
 
 # This is for the secretes for pulling an image from a private repository more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
 imagePullSecrets: []
