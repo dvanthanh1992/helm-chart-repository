@@ -1,6 +1,3 @@
-# helm-chart-repository
-
-
 # 🚀 Helm Chart Repository for GitOps Workflow
 
 This repository manages the Helm charts for deploying and managing applications using a **GitOps** workflow. It is structured to support multiple environments, ensuring seamless deployment across **Development, Staging, and Production**.
