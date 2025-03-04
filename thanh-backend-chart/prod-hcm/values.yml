@@ -1,13 +1,13 @@
 ---
 
-replicaCount: 2
+replicaCount: 4
 
 env:
   STAGE_ENVIRONMENT: "HCM-PRODUCTION"
-  APP_NAME: "FRONTEND APPLICATION"
-  
+  APP_NAME: "BACKEND APPLICATION"
+
 image:
-  repository: 192.168.145.112/kargo/frontend-app
+  repository: 192.168.145.112/kargo/backend-app
   pullPolicy: IfNotPresent
   tag: 1.0.0
 

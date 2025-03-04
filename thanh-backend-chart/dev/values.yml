@@ -1,14 +1,15 @@
 ---
 
-replicaCount: 1
+replicaCount: 2
 
 env:
   STAGE_ENVIRONMENT: "DEV-ENVIRONMENT"
-  
+  APP_NAME: "BACKEND APPLICATION"
+
 image:
-  repository: 192.168.145.182/kargo/demo-app
+  repository: 192.168.145.112/kargo/backend-app
   pullPolicy: IfNotPresent
-  tag: 3.0.0
+  tag: 1.0.0
 
 service:
   type: LoadBalancer
