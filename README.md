@@ -8,22 +8,20 @@ This repository manages the Helm charts for deploying and managing applications 
 helm-chart-repository/
 ├── thanh-backend-chart/            # Helm Chart for Backend Service
 │   ├── Chart.yaml                  # Metadata for the Helm Chart
-│   ├── values.yml                  # Default values for the chart
 │   ├── dev/                        # Dev specific values
+│   │   └── values.yml
 │   ├── staging/                    # Staging specific values
+│   │   └── values.yml
 │   ├── prod-hcm/                   # HCM-Production specific values
+│   │   └── values.yml
 │   ├── prod-hni/                   # HNI-Production specific values
+│   │   └── values.yml
 │   ├── templates/                  # Kubernetes resource templates
 │   │   ├── deployment.yaml         # Deployment manifest
 │   │   ├── service.yaml            # Service manifest
-│   │   ├── ingress.yaml            # Ingress rules
-│   │   ├── hpa.yaml                # Horizontal Pod Autoscaler
 │   │   ├── _helpers.tpl            # Template helpers
-│   │   ├── serviceaccount.yaml     # Service Account
-│   │   ├── NOTES.txt               # Notes for Helm users
 │   │   └── tests/                  # Tests for Helm chart
-│   └── values.yml                  # Global values
-│
+│           └── test-connection.yaml
 ├── thanh-frontend-chart/    # Helm Chart for Frontend Service (same structure as backend)
 │
 └── README.md                # Documentation
