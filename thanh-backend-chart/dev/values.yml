@@ -1,6 +1,6 @@
 ---
 
-replicaCount: 3
+replicaCount: 2
 
 env:
   STAGE_ENVIRONMENT: "DEV-ENVIRONMENT"
