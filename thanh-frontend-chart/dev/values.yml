@@ -7,9 +7,9 @@ env:
   APP_NAME: "FRONTEND APPLICATION"
   
 image:
-  repository: binh-harbor.iij.org.vn/binh-project/frontend-application
+  repository: thanh-harbor.iij.org.vn/thanh-project/frontend-application
   pullPolicy: IfNotPresent
-  tag: 4.0.0
+  tag: 2.0.0
 
 service:
   type: LoadBalancer
