@@ -9,7 +9,7 @@ env:
 image:
   repository: thanh-harbor.iij.org.vn/thanh-project/frontend-application
   pullPolicy: IfNotPresent
-  tag: 2.0.0
+  tag: 3.0.0
 
 service:
   type: LoadBalancer
