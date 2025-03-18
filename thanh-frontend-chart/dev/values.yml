@@ -9,7 +9,7 @@ env:
 image:
   repository: ha-harbor.iij.org.vn/ha-project/frontend-application
   pullPolicy: IfNotPresent
-  tag: 4.0.0
+  tag: 3.0.0
 
 service:
   type: LoadBalancer
