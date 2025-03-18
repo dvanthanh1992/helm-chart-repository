@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "thanh-fullend-chart.fullname" . }}-redis-sv
+  name: {{ include "thanh-fullend-chart.fullname" . }}rsv
 spec:
   selector:
     app: {{ include "thanh-fullend-chart.name" . }}-redis
