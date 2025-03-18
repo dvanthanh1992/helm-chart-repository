@@ -40,7 +40,7 @@ spec:
             - name: APP_NAME
               value: "{{ .Values.fullend.env.APP_NAME }}"
             - name: REDIS_HOST
-              value: "{{ include "thanh-fullend-chart.fullname" . }}rsv"
+              value: "fullend-redis-sv"
             - name: REDIS_PORT
               value: "6379"
           ports:
