@@ -1,0 +1,30 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "thanh-fullend-chart.fullname" . }}-redis
+  labels:
+    app: {{ include "thanh-fullend-chart.name" . }}-redis
+spec:
+  replicas: {{ .Values.redis.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "thanh-fullend-chart.name" . }}-redis
+  template:
+    metadata:
+      labels:
+        app: {{ include "thanh-fullend-chart.name" . }}-redis
+    spec:
+      containers:
+        - name: redis
+          image: "{{ .Values.redis.image.repository }}:{{ .Values.redis.image.tag }}"
+          imagePullPolicy: {{ .Values.redis.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.redis.service.port }}
+          volumeMounts:
+            - name: redis-storage
+              mountPath: /data
+      volumes:
+        - name: redis-storage
+          persistentVolumeClaim:
+            claimName: {{ include "thanh-fullend-chart.fullname" . }}-redis-pvc

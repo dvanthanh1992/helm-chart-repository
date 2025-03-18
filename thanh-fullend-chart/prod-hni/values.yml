@@ -1,0 +1,28 @@
+---
+
+fullend:
+  replicaCount: 3
+
+  env:
+    STAGE_ENVIRONMENT: "HNI-PRODUCTION"
+    APP_NAME: "FULLEND APPLICATION"
+
+  image:
+    repository: ha-harbor.iij.org.vn/ha-project/fullend-application
+    tag: 2.0.0
+    pullPolicy: IfNotPresent
+
+  service:
+    type: LoadBalancer
+    port: 80
+
+redis:
+  replicaCount: 1
+  image:
+    repository: redis
+    tag: "6.2"
+    pullPolicy: IfNotPresent
+  service:
+    port: 6379
+  pvc:
+    storage: 1Gi

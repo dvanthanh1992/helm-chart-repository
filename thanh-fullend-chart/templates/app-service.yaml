@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "thanh-fullend-chart.fullname" . }}
+  labels:
+    {{- include "thanh-fullend-chart.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.fullend.service.type }}
+  ports:
+    - port: {{ .Values.fullend.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "thanh-fullend-chart.selectorLabels" . | nindent 4 }}
