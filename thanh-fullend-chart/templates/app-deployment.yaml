@@ -1,0 +1,50 @@
+---
+# Source: thanh-fullend-chart/templates/app-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: thanh-fullend-chart
+  labels:
+    helm.sh/chart: thanh-fullend-chart-1.0.0
+    app.kubernetes.io/name: thanh-fullend-chart
+    app.kubernetes.io/instance: thanh-fullend-chart
+    app.kubernetes.io/version: "1.0.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: thanh-fullend-chart
+      app.kubernetes.io/instance: thanh-fullend-chart
+  template:
+    metadata:
+      labels:
+        helm.sh/chart: thanh-fullend-chart-1.0.0
+        app.kubernetes.io/name: thanh-fullend-chart
+        app.kubernetes.io/instance: thanh-fullend-chart
+        app.kubernetes.io/version: "1.0.0"
+        app.kubernetes.io/managed-by: Helm
+    spec:
+      securityContext:
+        null
+      containers:
+        - name: thanh-fullend-chart
+          securityContext:
+            null
+          image: "oki-harbor.iij.org.vn/oki-project/fullend-application:1.0.0"
+          imagePullPolicy: Always
+          env:
+            - name: STAGE_ENVIRONMENT
+              value: "STG-ENVIRONMENT"
+            - name: APP_NAME
+              value: "FULLEND APPLICATION"
+            - name: REDIS_HOST
+              value: "thanh-fullend-chart-redis-service"
+            - name: REDIS_PORT
+              value: "6379"
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          resources:
+            null

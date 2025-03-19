@@ -1,0 +1,31 @@
+---
+# Source: thanh-fullend-chart/templates/redis-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: thanh-fullend-chart-redis
+  labels:
+    app: thanh-fullend-chart-redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: thanh-fullend-chart-redis
+  template:
+    metadata:
+      labels:
+        app: thanh-fullend-chart-redis
+    spec:
+      containers:
+        - name: redis
+          image: "redis:6.2"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 6379
+          volumeMounts:
+            - name: redis-storage
+              mountPath: /data
+      volumes:
+        - name: redis-storage
+          persistentVolumeClaim:
+            claimName: thanh-fullend-chart-redis-pvc
