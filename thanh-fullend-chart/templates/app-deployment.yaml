@@ -31,7 +31,7 @@ spec:
         - name: thanh-fullend-chart
           securityContext:
             null
-          image: "oki-harbor.iij.org.vn/oki-project/fullend-application:1.0.0"
+          image: "oki-harbor.iij.org.vn/oki-project/fullend-application:2.0.0"
           imagePullPolicy: Always
           env:
             - name: STAGE_ENVIRONMENT
