@@ -1,0 +1,13 @@
+---
+# Source: thanh-fullend-chart/templates/redis-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: thanh-fullend-chart-redis-service
+spec:
+  selector:
+    app: thanh-fullend-chart-redis
+  ports:
+    - protocol: TCP
+      port: 6379
+      targetPort: 6379
