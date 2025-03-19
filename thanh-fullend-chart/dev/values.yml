@@ -9,7 +9,7 @@ fullend:
 
   image:
     repository: oki-harbor.iij.org.vn/oki-project/fullend-application
-    tag: 1.0.0
+    tag: 2.0.0
     pullPolicy: Always
 
   service:
