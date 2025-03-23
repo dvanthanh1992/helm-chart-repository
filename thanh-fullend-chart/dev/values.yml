@@ -8,8 +8,8 @@ fullend:
     APP_NAME: "FULLEND APPLICATION"
 
   image:
-    repository: oki-harbor.iij.org.vn/oki-project/fullend-application
-    tag: 2.0.0
+    repository: demo-harbor.iij.org.vn/demo-project/fullend-application
+    tag: 5.0.0
     pullPolicy: Always
 
   service:
