@@ -9,7 +9,7 @@ fullend:
 
   image:
     repository: demo-harbor.iij.org.vn/demo-project/fullend-application
-    tag: 5.0.0
+    tag: 6.0.0
     pullPolicy: Always
 
   service:
