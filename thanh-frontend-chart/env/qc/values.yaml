@@ -1,0 +1,16 @@
+---
+
+replicaCount: 3
+
+env:
+  STAGE_ENVIRONMENT: "QC-ENVIRONMENT"
+  APP_NAME: "FRONTEND APPLICATION"
+  
+image:
+  repository: ha-harbor.iij.org.vn/ha-project/frontend-application
+  pullPolicy: IfNotPresent
+  tag: 1.0.0
+
+service:
+  type: LoadBalancer
+  port: 80
