@@ -6,66 +6,66 @@ metadata:
   labels:
     {{- include "thanh-backend-chart.labels" . | nindent 4 }}
 spec:
-  replicas: {{ ..Values.backend.replicaCount }}
+  replicas: {{ .Values.backend.replicaCount }}
   selector:
     matchLabels:
       {{- include "thanh-backend-chart.selectorLabels" . | nindent 6 }}
   template:
     metadata:
-      {{- with ..Values.backend.podAnnotations }}
+      {{- with .Values.backend.podAnnotations }}
       annotations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
         {{- include "thanh-backend-chart.labels" . | nindent 8 }}
-        {{- with ..Values.backend.podLabels }}
+        {{- with .Values.backend.podLabels }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
     spec:
-      {{- with ..Values.backend.imagePullSecrets }}
+      {{- with .Values.backend.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       securityContext:
-        {{- toYaml ..Values.backend.podSecurityContext | nindent 8 }}
+        {{- toYaml .Values.backend.podSecurityContext | nindent 8 }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
-            {{- toYaml ..Values.backend.securityContext | nindent 12 }}
-          image: "{{ ..Values.backend.image.repository }}:{{ ..Values.backend.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ ..Values.backend.image.pullPolicy }}
+            {{- toYaml .Values.backend.securityContext | nindent 12 }}
+          image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
           env:
             - name: STAGE_ENVIRONMENT
-              value: "{{ ..Values.backend.env.STAGE_ENVIRONMENT }}"
+              value: "{{ .Values.backend.env.STAGE_ENVIRONMENT }}"
             - name: APP_NAME
-              value: "{{ ..Values.backend.env.APP_NAME }}"
+              value: "{{ .Values.backend.env.APP_NAME }}"
             - name: REDIS_HOST
               value: "thanh-backend-chart-redis-service"
             - name: REDIS_PORT
               value: "6379"
           ports:
             - name: http
-              containerPort: {{ ..Values.backend.service.port }}
+              containerPort: {{ .Values.backend.service.port }}
               protocol: TCP
           resources:
-            {{- toYaml ..Values.backend.resources | nindent 12 }}
-          {{- with ..Values.backend.volumeMounts }}
+            {{- toYaml .Values.backend.resources | nindent 12 }}
+          {{- with .Values.backend.volumeMounts }}
           volumeMounts:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-      {{- with ..Values.backend.volumes }}
+      {{- with .Values.backend.volumes }}
       volumes:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with ..Values.backend.nodeSelector }}
+      {{- with .Values.backend.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with ..Values.backend.affinity }}
+      {{- with .Values.backend.affinity }}
       affinity:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with ..Values.backend.tolerations }}
+      {{- with .Values.backend.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}

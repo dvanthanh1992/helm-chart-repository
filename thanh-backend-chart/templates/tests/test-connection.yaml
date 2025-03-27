@@ -11,5 +11,5 @@ spec:
     - name: wget
       image: busybox
       command: ['wget']
-      args: ['{{ include "thanh-backend-chart.fullname" . }}:{{ ..Values.backend.service.port }}']
+      args: ['{{ include "thanh-backend-chart.fullname" . }}:{{ .Values.backend.service.port | default 80 }}']
   restartPolicy: Never
