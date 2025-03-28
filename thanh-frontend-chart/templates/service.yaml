@@ -1,0 +1,22 @@
+---
+# Source: thanh-frontend-chart/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: thanh-frontend-chart
+  labels:
+    helm.sh/chart: thanh-frontend-chart-1.0.0
+    app.kubernetes.io/name: thanh-frontend-chart
+    app.kubernetes.io/instance: thanh-frontend-chart
+    app.kubernetes.io/version: "1.0.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: thanh-frontend-chart
+    app.kubernetes.io/instance: thanh-frontend-chart

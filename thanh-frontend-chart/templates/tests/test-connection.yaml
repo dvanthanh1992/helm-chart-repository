@@ -1,0 +1,21 @@
+---
+# Source: thanh-frontend-chart/templates/tests/test-connection.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "thanh-frontend-chart-test-connection"
+  labels:
+    helm.sh/chart: thanh-frontend-chart-1.0.0
+    app.kubernetes.io/name: thanh-frontend-chart
+    app.kubernetes.io/instance: thanh-frontend-chart
+    app.kubernetes.io/version: "1.0.0"
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['thanh-frontend-chart:80']
+  restartPolicy: Never

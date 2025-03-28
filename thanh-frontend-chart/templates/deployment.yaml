@@ -1,0 +1,46 @@
+---
+# Source: thanh-frontend-chart/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: thanh-frontend-chart
+  labels:
+    helm.sh/chart: thanh-frontend-chart-1.0.0
+    app.kubernetes.io/name: thanh-frontend-chart
+    app.kubernetes.io/instance: thanh-frontend-chart
+    app.kubernetes.io/version: "1.0.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: thanh-frontend-chart
+      app.kubernetes.io/instance: thanh-frontend-chart
+  template:
+    metadata:
+      labels:
+        helm.sh/chart: thanh-frontend-chart-1.0.0
+        app.kubernetes.io/name: thanh-frontend-chart
+        app.kubernetes.io/instance: thanh-frontend-chart
+        app.kubernetes.io/version: "1.0.0"
+        app.kubernetes.io/managed-by: Helm
+    spec:
+      securityContext:
+        null
+      containers:
+        - name: thanh-frontend-chart
+          securityContext:
+            null
+          image: "demo-harbor.iij.org.vn/demo-project/frontend-application:1.0.0"
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: STAGE_ENVIRONMENT
+              value: "DEV-ENVIRONMENT"
+            - name: APP_NAME
+              value: "FRONTEND APPLICATION"
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          resources:
+            null
