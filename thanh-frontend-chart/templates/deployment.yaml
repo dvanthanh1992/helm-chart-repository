@@ -31,7 +31,7 @@ spec:
         - name: thanh-frontend-chart
           securityContext:
             null
-          image: "demo-harbor.iij.org.vn/demo-project/frontend-application:1.0.0"
+          image: "demo-harbor.iij.org.vn/demo-project/frontend-application:2.0.0"
           imagePullPolicy: IfNotPresent
           env:
             - name: STAGE_ENVIRONMENT
