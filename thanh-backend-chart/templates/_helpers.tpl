@@ -1,8 +1,8 @@
-{{- define "tony-be.name" -}}
+{{- define "be-chart.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
-{{- define "tony-be.fullname" -}}
+{{- define "be-chart.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -15,20 +15,20 @@
 {{- end }}
 {{- end }}
 
-{{- define "tony-be.chart" -}}
+{{- define "be-chart.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
-{{- define "tony-be.labels" -}}
-helm.sh/chart: {{ include "tony-be.chart" . }}
-{{ include "tony-be.selectorLabels" . }}
+{{- define "be-chart.labels" -}}
+helm.sh/chart: {{ include "be-chart.chart" . }}
+{{ include "be-chart.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end }}
 
-{{- define "tony-be.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "tony-be.name" . }}
+{{- define "be-chart.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "be-chart.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}

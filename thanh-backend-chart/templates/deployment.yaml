@@ -1,19 +1,19 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
-  name: {{ include "tony-be.fullname" . }}
+  name: {{ include "be-chart.fullname" . }}
   labels:
-    {{- include "tony-be.labels" . | nindent 4 }}
+    {{- include "be-chart.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   revisionHistoryLimit: 2
   selector:
     matchLabels:
-      {{- include "tony-be.selectorLabels" . | nindent 6 }}
+      {{- include "be-chart.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "tony-be.selectorLabels" . | nindent 8 }}
+        {{- include "be-chart.selectorLabels" . | nindent 8 }}
         version: {{ .Values.image.tag | quote }}
     spec:
       containers:
@@ -52,16 +52,16 @@ spec:
   strategy:
     {{- if eq .Values.rollout.strategy "canary" }}
     canary:
-      canaryService: {{ include "tony-be.fullname" . }}-canary
-      stableService: {{ include "tony-be.fullname" . }}-stable
+      canaryService: {{ include "be-chart.fullname" . }}-canary
+      stableService: {{ include "be-chart.fullname" . }}-stable
       trafficRouting:
         nginx:
-          stableIngress: {{ include "tony-be.fullname" . }}
+          stableIngress: {{ include "be-chart.fullname" . }}
       steps:
         {{- toYaml .Values.rollout.canarySteps | nindent 8 }}
     {{- else }}
     blueGreen:
-      activeService: {{ include "tony-be.fullname" . }}-active
-      previewService: {{ include "tony-be.fullname" . }}-preview
+      activeService: {{ include "be-chart.fullname" . }}-active
+      previewService: {{ include "be-chart.fullname" . }}-preview
       autoPromotionEnabled: false
     {{- end }}

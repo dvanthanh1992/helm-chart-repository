@@ -1,9 +1,9 @@
-piVersion: v1
+apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "tony-be.fullname" . }}-stable
+  name: {{ include "be-chart.fullname" . }}-stable
   labels:
-    {{- include "tony-be.labels" . | nindent 4 }}
+    {{- include "be-chart.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
   {{- if and (eq .Values.service.type "LoadBalancer") .Values.service.loadBalancerIP }}
@@ -15,14 +15,14 @@ spec:
       protocol: TCP
       name: http
   selector:
-    {{- include "tony-be.selectorLabels" . | nindent 4 }}
+    {{- include "be-chart.selectorLabels" . | nindent 4 }}
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "tony-be.fullname" . }}-canary
+  name: {{ include "be-chart.fullname" . }}-canary
   labels:
-    {{- include "tony-be.labels" . | nindent 4 }}
+    {{- include "be-chart.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
   ports:
@@ -31,4 +31,4 @@ spec:
       protocol: TCP
       name: http
   selector:
-    {{- include "tony-be.selectorLabels" . | nindent 4 }}
+    {{- include "be-chart.selectorLabels" . | nindent 4 }}

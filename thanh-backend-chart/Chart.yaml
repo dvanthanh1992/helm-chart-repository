@@ -1,6 +1,6 @@
 ---
 apiVersion: v2
-name: thanh-backend-chart
+name: be-chart
 description: Flask app with Argo Rollouts canary deployment
 type: application
 version: 1.0.0
