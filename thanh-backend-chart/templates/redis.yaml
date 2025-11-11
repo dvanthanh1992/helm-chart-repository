@@ -2,20 +2,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "thanh-backend-chart.fullname" . }}-redis
+  name: {{ include "tony-be.fullname" . }}-redis
   labels:
-    {{- include "thanh-backend-chart.labels" . | nindent 4 }}
+    {{- include "tony-be.labels" . | nindent 4 }}
     app.kubernetes.io/component: redis
 spec:
   replicas: 1
   selector:
     matchLabels:
-      {{- include "thanh-backend-chart.selectorLabels" . | nindent 6 }}
+      {{- include "tony-be.selectorLabels" . | nindent 6 }}
       app.kubernetes.io/component: redis
   template:
     metadata:
       labels:
-        {{- include "thanh-backend-chart.selectorLabels" . | nindent 8 }}
+        {{- include "tony-be.selectorLabels" . | nindent 8 }}
         app.kubernetes.io/component: redis
     spec:
       containers:
@@ -36,13 +36,13 @@ kind: Service
 metadata:
   name: redis-service
   labels:
-    {{- include "thanh-backend-chart.labels" . | nindent 4 }}
+    {{- include "tony-be.labels" . | nindent 4 }}
     app.kubernetes.io/component: redis
 spec:
   ports:
     - port: 6379
       targetPort: 6379
   selector:
-    {{- include "thanh-backend-chart.selectorLabels" . | nindent 4 }}
+    {{- include "tony-be.selectorLabels" . | nindent 4 }}
     app.kubernetes.io/component: redis
 {{- end }}
