@@ -1,0 +1,28 @@
+---
+
+backend:
+  replicaCount: 3
+
+  env:
+    STAGE_ENVIRONMENT: "STG-ENVIRONMENT"
+    APP_NAME: "BACKEND APPLICATION"
+
+  image:
+    repository: demo-harbor.mercurybridge.org/demo-project/backend-application
+    tag: release-1.0.4.0.0
+    pullPolicy: IfNotPresent
+
+  service:
+    type: LoadBalancer
+    port: 80
+
+redis:
+  replicaCount: 1
+  image:
+    repository: redis
+    tag: "6.2"
+    pullPolicy: IfNotPresent
+  service:
+    port: 6379
+  pvc:
+    storage: 1Gi

@@ -1,7 +1,7 @@
 ---
 apiVersion: v2
 name: thanh-backend-chart
-description: Flask app with Argo Rollouts canary deployment
+description: A Helm chart for deploying app with database on Kubernetes
 type: application
 version: 1.0.0
 appVersion: "1.0.0"

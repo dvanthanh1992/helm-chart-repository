@@ -1,28 +1,54 @@
 ---
 
-backend:
-  replicaCount: 3
+replicaCount: 5
 
-  env:
-    STAGE_ENVIRONMENT: "STG-ENVIRONMENT"
-    APP_NAME: "BACKEND APPLICATION"
+env:
+  APP_NAME: "BACKEND APPLICATION"
+  STAGE_ENVIRONMENT: "STG-ENVIRONMENT"
+  REDIS_HOST: "redis-service"
+  REDIS_PORT: "6379"
 
-  image:
-    repository: demo-harbor.mercurybridge.org/demo-project/backend-application
-    tag: release-1.0.4.0.0
-    pullPolicy: IfNotPresent
+image:
+  repository: demo-harbor.mercurybridge.org/demo-project/backend-application
+  pullPolicy: IfNotPresent
+  tag: release-1.0.4.0.0
 
-  service:
-    type: LoadBalancer
-    port: 80
+rollout:
+  strategy: canary
+  canarySteps:
+    - setWeight: 20
+    - pause: {duration: 20s}
+    - setWeight: 40
+    - pause: {duration: 20s}
+    - setWeight: 60
+    - pause: {duration: 20s}
+    - setWeight: 80
+    - pause: {duration: 20s}
+
+service:
+  type: LoadBalancer
+  port: 80
+
+ingress:
+  enabled: false
+  className: "nginx"
+  annotations: {}
+  hosts:
+    - host: stg-backend-application.local
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []
 
 redis:
-  replicaCount: 1
-  image:
-    repository: redis
-    tag: "6.2"
-    pullPolicy: IfNotPresent
-  service:
-    port: 6379
-  pvc:
-    storage: 1Gi
+  enabled: true
+  auth:
+    enabled: false
+
+resources:
+  limits:
+    cpu: 200m
+    memory: 256Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
