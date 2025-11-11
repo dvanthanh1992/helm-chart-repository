@@ -1,0 +1,21 @@
+---
+# Source: be-chart/templates/tests/test-connection.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "thanh-backend-chart-be-chart-test-connection"
+  labels:
+    helm.sh/chart: be-chart-1.0.0
+    app.kubernetes.io/name: be-chart
+    app.kubernetes.io/instance: thanh-backend-chart
+    app.kubernetes.io/version: "1.0.0"
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['thanh-backend-chart-be-chart-stable:80']
+  restartPolicy: Never
