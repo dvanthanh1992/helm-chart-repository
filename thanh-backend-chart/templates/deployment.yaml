@@ -22,7 +22,7 @@ spec:
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
         - name: http
-          containerPort: {{ .Values.service.targetPort }}
+          containerPort: 80
           protocol: TCP
         env:
         - name: APP_NAME
@@ -52,11 +52,13 @@ spec:
   strategy:
     {{- if eq .Values.rollout.strategy "canary" }}
     canary:
+      {{- if .Values.ingress.enabled }}
       canaryService: {{ include "be-chart.fullname" . }}-canary
       stableService: {{ include "be-chart.fullname" . }}-stable
       trafficRouting:
         nginx:
           stableIngress: {{ include "be-chart.fullname" . }}
+      {{- end }}
       steps:
         {{- toYaml .Values.rollout.canarySteps | nindent 8 }}
     {{- else }}
