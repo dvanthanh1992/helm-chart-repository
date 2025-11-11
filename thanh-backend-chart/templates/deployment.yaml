@@ -52,8 +52,8 @@ spec:
   strategy:
     {{- if eq .Values.rollout.strategy "canary" }}
     canary:
-      canaryService: {{ include "thanh-backend-chart.fullname" . }}-canary
-      stableService: {{ include "thanh-backend-chart.fullname" . }}-stable
+      canaryService: {{ include "thanh-backend-chart.fullname" . }}-can
+      stableService: {{ include "thanh-backend-chart.fullname" . }}-stab
       trafficRouting:
         nginx:
           stableIngress: {{ include "thanh-backend-chart.fullname" . }}
@@ -61,7 +61,7 @@ spec:
         {{- toYaml .Values.rollout.canarySteps | nindent 8 }}
     {{- else }}
     blueGreen:
-      activeService: {{ include "thanh-backend-chart.fullname" . }}-active
-      previewService: {{ include "thanh-backend-chart.fullname" . }}-preview
+      activeService: {{ include "thanh-backend-chart.fullname" . }}-act
+      previewService: {{ include "thanh-backend-chart.fullname" . }}-prev
       autoPromotionEnabled: false
     {{- end }}
