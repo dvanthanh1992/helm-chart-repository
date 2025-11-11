@@ -8,8 +8,8 @@ backend:
     APP_NAME: "BACKEND APPLICATION"
 
   image:
-    repository: demo-harbor.iij.org.vn/demo-project/backend-application
-    tag: 4.0.0
+    repository: demo-harbor.mercurybridge.org/demo-project/backend-application
+    tag: 1.0.0
     pullPolicy: IfNotPresent
 
   service:
