@@ -1,18 +1,19 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
-  name: {{ include "flask-rollout-demo.fullname" . }}
+  name: {{ include "thanh-backend-chart.fullname" . }}
   labels:
-    {{- include "flask-rollout-demo.labels" . | nindent 4 }}
+    {{- include "thanh-backend-chart.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
+  revisionHistoryLimit: 2
   selector:
     matchLabels:
-      {{- include "flask-rollout-demo.selectorLabels" . | nindent 6 }}
+      {{- include "thanh-backend-chart.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "flask-rollout-demo.selectorLabels" . | nindent 8 }}
+        {{- include "thanh-backend-chart.selectorLabels" . | nindent 8 }}
         version: {{ .Values.image.tag | quote }}
     spec:
       containers:
@@ -48,3 +49,19 @@ spec:
           periodSeconds: 5
         resources:
           {{- toYaml .Values.resources | nindent 10 }}
+  strategy:
+    {{- if eq .Values.rollout.strategy "canary" }}
+    canary:
+      canaryService: {{ include "thanh-backend-chart.fullname" . }}-canary
+      stableService: {{ include "thanh-backend-chart.fullname" . }}-stable
+      trafficRouting:
+        nginx:
+          stableIngress: {{ include "thanh-backend-chart.fullname" . }}
+      steps:
+        {{- toYaml .Values.rollout.canarySteps | nindent 8 }}
+    {{- else }}
+    blueGreen:
+      activeService: {{ include "thanh-backend-chart.fullname" . }}-active
+      previewService: {{ include "thanh-backend-chart.fullname" . }}-preview
+      autoPromotionEnabled: false
+    {{- end }}
