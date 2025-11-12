@@ -1,9 +1,9 @@
 ---
 
-replicaCount: 5
+replicaCount: 10
 
 env:
-  APP_NAME: "BACKEND APPLICATION"
+  APP_NAME: "TONY APPLICATION"
   STAGE_ENVIRONMENT: "STG-ENVIRONMENT"
   REDIS_HOST: "redis-service"
   REDIS_PORT: "6379"
