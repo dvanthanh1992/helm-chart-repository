@@ -22,11 +22,11 @@ spec:
       labels:
         app.kubernetes.io/name: be-chart
         app.kubernetes.io/instance: thanh-backend-chart
-        version: "release-1.0.4.0.0"
+        version: "release-1.0.5.0.0"
     spec:
       containers:
       - name: be-chart
-        image: "demo-harbor.mercurybridge.org/demo-project/backend-application:release-1.0.4.0.0"
+        image: "demo-harbor.mercurybridge.org/demo-project/backend-application:release-1.0.5.0.0"
         imagePullPolicy: Always
         ports:
         - name: http
