@@ -1,0 +1,22 @@
+---
+# Source: be-chart/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: thanh-backend-chart-be-chart
+  labels:
+    helm.sh/chart: be-chart-1.0.0
+    app.kubernetes.io/name: be-chart
+    app.kubernetes.io/instance: thanh-backend-chart
+    app.kubernetes.io/version: "1.0.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: be-chart
+    app.kubernetes.io/instance: thanh-backend-chart

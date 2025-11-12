@@ -1,0 +1,79 @@
+---
+# Source: be-chart/templates/deployment.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: thanh-backend-chart-be-chart
+  labels:
+    helm.sh/chart: be-chart-1.0.0
+    app.kubernetes.io/name: be-chart
+    app.kubernetes.io/instance: thanh-backend-chart
+    app.kubernetes.io/version: "1.0.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  replicas: 5
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: be-chart
+      app.kubernetes.io/instance: thanh-backend-chart
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: be-chart
+        app.kubernetes.io/instance: thanh-backend-chart
+        version: "release-1.0.5.0.0"
+    spec:
+      containers:
+      - name: be-chart
+        image: "demo-harbor.mercurybridge.org/demo-project/backend-application:release-1.0.5.0.0"
+        imagePullPolicy: Always
+        ports:
+        - name: http
+          containerPort: 80
+          protocol: TCP
+        env:
+        - name: APP_NAME
+          value: "BACKEND APPLICATION"
+        - name: STAGE_ENVIRONMENT
+          value: "STG-ENVIRONMENT"
+        - name: IMAGE_VERSION
+          value: 
+        - name: REDIS_HOST
+          value: "redis-service"
+        - name: REDIS_PORT
+          value: "6379"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: http
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /
+            port: http
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        resources:
+          limits:
+            cpu: 200m
+            memory: 256Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+  strategy:
+    canary:
+      steps:
+        - setWeight: 20
+        - pause:
+            duration: 20s
+        - setWeight: 40
+        - pause:
+            duration: 20s
+        - setWeight: 60
+        - pause:
+            duration: 20s
+        - setWeight: 80
+        - pause:
+            duration: 20s
