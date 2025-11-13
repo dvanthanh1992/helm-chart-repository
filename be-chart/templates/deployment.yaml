@@ -11,7 +11,7 @@ metadata:
     app.kubernetes.io/version: "1.0.0"
     app.kubernetes.io/managed-by: Helm
 spec:
-  replicas: 5
+  replicas: 10
   revisionHistoryLimit: 2
   selector:
     matchLabels:
@@ -34,7 +34,7 @@ spec:
           protocol: TCP
         env:
         - name: APP_NAME
-          value: "BACKEND APPLICATION"
+          value: "TONY APPLICATION"
         - name: STAGE_ENVIRONMENT
           value: "STG-ENVIRONMENT"
         - name: IMAGE_VERSION
