@@ -11,7 +11,7 @@ env:
 image:
   repository: demo-harbor.mercurybridge.org/demo-project/backend-application
   pullPolicy: Always
-  tag: release-1.0.6.0.0
+  tag: release-1.0.7.0.0
 
 rollout:
   strategy: canary
